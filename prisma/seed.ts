@@ -1,5 +1,6 @@
 import { PrismaClient } from "../lib/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import bcrypt from "bcryptjs";
 
 const adapter = new PrismaBetterSqlite3({
   url: process.env.DATABASE_URL ?? "file:./dev.db",
@@ -108,6 +109,16 @@ async function main() {
     }
   }
 
+  const demoUser = await prisma.user.upsert({
+    where: { email: "demo@nailmaps.app" },
+    update: {},
+    create: {
+      email: "demo@nailmaps.app",
+      name: "Elif Yılmaz",
+      passwordHash: await bcrypt.hash("demo1234", 10),
+    },
+  });
+
   const existingAppointments = await prisma.appointment.count();
   if (existingAppointments === 0) {
     const today = new Date();
@@ -130,6 +141,7 @@ async function main() {
         {
           salonId: "bella-nails-studio",
           serviceId: "jel-oje",
+          userId: demoUser.id,
           salonName: "Bella Nails Studio",
           serviceName: "Kalıcı Oje (Jel)",
           duration: "60 dk",
@@ -143,6 +155,7 @@ async function main() {
         {
           salonId: "marbled-beauty-bar",
           serviceId: "mani-pedi",
+          userId: demoUser.id,
           salonName: "Marbled Beauty Bar",
           serviceName: "Manikür + Pedikür",
           duration: "75 dk",

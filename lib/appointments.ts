@@ -1,8 +1,9 @@
 import { prisma } from "./db";
 import { Appointment, AppointmentStatus } from "./types";
 
-export async function getAppointments(): Promise<Appointment[]> {
+export async function getAppointments(userId: string): Promise<Appointment[]> {
   const rows = await prisma.appointment.findMany({
+    where: { userId },
     orderBy: { createdAt: "desc" },
   });
   return rows.map((r) => ({

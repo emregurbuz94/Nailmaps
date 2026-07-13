@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "./db";
+import { auth } from "./auth";
 import { Appointment } from "./types";
 
 interface CreateAppointmentInput {
@@ -20,10 +21,16 @@ interface CreateAppointmentInput {
 export async function createAppointment(
   input: CreateAppointmentInput
 ): Promise<Appointment> {
+  const session = await auth();
+  if (!session?.user?.id) {
+    throw new Error("Randevu almak için giriş yapmalısın.");
+  }
+
   const row = await prisma.appointment.create({
     data: {
       salonId: input.salonId,
       serviceId: input.serviceId,
+      userId: session.user.id,
       salonName: input.salonName,
       serviceName: input.serviceName,
       duration: input.duration,

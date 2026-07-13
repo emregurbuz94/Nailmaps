@@ -723,3 +723,71 @@ h3,
   font-family: var(--font-inter), sans-serif;
   font-size: 12.5px;
 }
+
+/* ---------- Auth (login / signup) ---------- */
+.auth-wrap {
+  flex: 1;
+  padding: 48px 26px 0;
+}
+.auth-title {
+  font-size: 25px;
+  font-weight: 600;
+}
+.auth-sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  line-height: 1.6;
+}
+.form-field {
+  margin-top: 18px;
+}
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 14px 4px 14px 14px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  font-size: 14px;
+  font-family: var(--font-inter), sans-serif;
+  color: var(--ink);
+}
+.form-input:focus {
+  border-color: var(--wine);
+  outline: none;
+}
+.form-error {
+  margin-top: 16px;
+  color: var(--wine-dark);
+  font-size: 12.5px;
+  background: var(--blush);
+  padding: 10px 14px;
+  border-radius: 12px 4px 12px 12px;
+}
+.auth-submit {
+  margin-top: 24px;
+}
+.auth-switch {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.auth-switch a {
+  color: var(--wine);
+  font-weight: 600;
+}
+.auth-provider-note {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
