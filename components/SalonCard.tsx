@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SalonCover from "./SalonCover";
 import { Salon } from "@/lib/types";
-import { priceRangeLabel } from "@/lib/salons";
+import { priceRangeLabel } from "@/lib/pricing";
 
 interface Props {
   salon: Salon;

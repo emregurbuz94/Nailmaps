@@ -1,11 +1,14 @@
-import { getSalons, priceRangeLabel, USER_LOCATION } from "@/lib/salons";
+import { getSalons, USER_LOCATION } from "@/lib/salons";
+import { priceRangeLabel } from "@/lib/pricing";
 import { haversineMeters, formatDistance } from "@/lib/distance";
 import MapSection from "@/components/MapSection";
 import DiscoverList from "@/components/DiscoverList";
 import BottomNav from "@/components/BottomNav";
 
-export default function DiscoverPage() {
-  const salons = getSalons();
+export const dynamic = "force-dynamic";
+
+export default async function DiscoverPage() {
+  const salons = await getSalons();
 
   const items = salons
     .map((salon) => ({

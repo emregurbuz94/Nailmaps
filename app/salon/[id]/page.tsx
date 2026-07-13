@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSalonById, priceRangeLabel, USER_LOCATION } from "@/lib/salons";
+import { getSalonById, USER_LOCATION } from "@/lib/salons";
+import { priceRangeLabel } from "@/lib/pricing";
 import { haversineMeters, formatDistance } from "@/lib/distance";
 import SalonCover from "@/components/SalonCover";
 
@@ -10,7 +11,7 @@ export default async function SalonDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const salon = getSalonById(id);
+  const salon = await getSalonById(id);
   if (!salon) notFound();
 
   const distanceLabel = formatDistance(haversineMeters(USER_LOCATION, salon));

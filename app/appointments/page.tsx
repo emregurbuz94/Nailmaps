@@ -1,10 +1,10 @@
-"use client";
-
-import { useAppointments } from "@/lib/appointments";
+import { getAppointments } from "@/lib/appointments";
 import BottomNav from "@/components/BottomNav";
 
-export default function AppointmentsPage() {
-  const appointments = useAppointments();
+export const dynamic = "force-dynamic";
+
+export default async function AppointmentsPage() {
+  const appointments = await getAppointments();
 
   return (
     <div className="app-shell">
