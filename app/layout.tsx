@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -18,6 +19,18 @@ export const metadata: Metadata = {
   title: "NailMaps — Yakınındaki tırnak salonları",
   description:
     "NailMaps: yakınındaki tırnak salonlarını haritada keşfet, fiyatları karşılaştır, randevunu al.",
+  appleWebApp: {
+    capable: true,
+    title: "NailMaps",
+    statusBarStyle: "default",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#93314C",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -27,7 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={`${fraunces.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ServiceWorkerRegister />
+      </body>
     </html>
   );
 }
